@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Verify OTP</title>
+        <style>
+        body{
+            background-color: black;
+        }
+        form{
+            margin-top: 100px;
+            width: 35%;
+            top: 50%;
+            font-weight: bold;
+            padding: 10px;
+            border: 2px solid white;
+        }
+        ::-webkit-scrollbar{
+display: none;
+}
+        input{
+            border: 2px solid black;
+            width: 250px;
+            margin: 10px;
+            text-align: center;
+            font-size: 15px;
+            height: 35px;
+            border-radius: 4px;
+        }
+        input:hover{
+            cursor: pointer;
+        }
+    </style>
+    </head>
+    <body>
+        <center>
+    <form method="POST">
+        {%csrf_token%}
+        <h1 style="color: white;font-family: Arial;">Verify OTP</h1>
+        <p style="color: white;">A 6-digit OTP has been sent to your email:<br>
+        {{user.username}}</p>
+        <input type="text" name='otp' placeholder="ENTER OTP">
+        {% for m in messages %}
+        <p style="color: white;width: 250px;background-color: red;">{{m}}</p>
+        {% endfor %}
+        <input type="submit" name='submit1' value="Submit" style="background-color: green;color: white;border: none;border-radius: 25px;font-weight: bold;">
+        <input type='submit' name='resend' value="Resend OTP" style="background-color: blue;color: white;border: none;border-radius: 25px;font-weight: bold;">
+
+
+    </form>
+</center>
+    </body>
+</html>

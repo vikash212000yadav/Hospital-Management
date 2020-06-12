@@ -1,0 +1,71 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<div style="height: 45%;border: 1px solid black;margin: 10px;">
+    <form method="POST" action='{% url "accounting" %}'>
+        {%csrf_token%}
+    <table>
+    <tr><th>Patient:</th><th><select name="pat">
+        {% for p in p %}
+        <option value="{{p}}">{{p}}</option>
+        {%endfor%}
+    </select></th></tr>
+    <tr><th>Paid:</th><th><input type="number" name='paid'></th></tr>
+    <tr><th>Outstanding:</th><th><input type="number" name='out'></th></tr>
+</table>
+<center>
+<input type="submit" value="CREATE INVOICE">
+</center>
+</form>
+</div>
+<div class='appt' style="height: 50%;">
+<button style="width: 100%;">Individual Outstandings</button>
+<center>
+<table style="text-align: center;">
+    <tr style="background-color: black;color: white;text-align: center;"><th>Patient Name</th><th>Outstanding</th><th>Paid</th><th>Remainder</th></tr>
+    {% for payt in payt %}
+    <tr><th>{{payt.patient}}</th>
+        <th>{{payt.outstanding}}</th>
+        <th>{{payt.paid}}</th>
+        <form method="POST" action="{% url 'send' %}">
+            {%csrf_token%}
+            <input type='hidden' value="{{ payt.pmid }}" name='pid'>
+        <th><button type='submit' style="padding: 10px;font-size: 14px;">Send Remainder</button></th>
+        </form></tr>
+    {% endfor %}
+</table>
+</center>
+</div>
+
+<div class='pat' style="height: 50%;">
+<button style="width: 100%;">Consultation's Outstandings</button>
+<center>
+<table style="text-align: center;">
+    <tr style="background-color: black;color: white;text-align: center;">
+        <th>Date</th>
+        <th>Patient Name</th>
+        <th>Paid</th>
+        <th>Outstanding</th>
+        <th>Total</th>
+        <th>Invoice</th>
+    </tr>
+    {% for payt in payt %}
+        <tr>
+            <th>{{payt.date|date:"F d Y"}}</th>
+            <th>{{payt.patient}}</th>
+            <th>{{payt.paid}}</th>
+            <th>{{payt.outstanding}}</th>
+            <th>{{payt.total}}</th>
+            <form method="POST" action="{% url 'show' %}">
+                {%csrf_token%}
+                <input type='hidden' value="{{ payt.pmid }}" name='pid'>
+            <th><button type='submit' style="padding: 1px;">Show Invoice</button></th>
+            </form>
+
+        </tr>
+            </form>
+    {% endfor %}
+</table>
+</center>
+</div>
+{% endblock %}

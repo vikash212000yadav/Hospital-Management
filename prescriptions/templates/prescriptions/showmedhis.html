@@ -1,0 +1,12 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+{% for pre in pre %}
+<div style="margin-left: 20%;font-size: 18px;background-color: honeydew;width: 60%;padding: 10px;border-bottom: 2px solid black;">
+<h2>Date : {{ pre.date|date:"F d Y" }}</h2>
+<b>Symptoms : </b>{{ pre.disease }}<br><br>
+<b>Prescription : </b>{{ pre.prescription }}<br><br>
+</div>    
+{% endfor %}
+
+{% endblock %}

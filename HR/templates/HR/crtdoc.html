@@ -1,0 +1,33 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<center>
+<div class="profile">
+    {% for m in messages %}
+        <p style="color: white;width: 250px;background-color: red;">{{m}}</p>
+        {% endfor %}
+<form method="POST" action='{% url "crtdoc" %}'>
+{% csrf_token %}
+<table>
+<tr><th>Name:</th><th><input type="text" name='name'></th></tr>
+<tr><th>Email:</th><th><input type="text" name='email'></th></tr>
+<tr><th>Phone:</th><th><input type="text" name='phone'></th></tr>
+<tr><th>Gender:</th><th><select name="gender">
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option></th></tr>
+<tr><th>Age:</th><th><input type="text" name='age'></th></tr>
+<tr><th>Status:</th><th><select name="status">
+    <option value="ACTIVE">ACTIVE</option>
+    <option value="INACTIVE">INACTIVE</option>
+    </select></th></tr>
+    <tr><th>Department:</th><th><input type="text" name='dept'></th></tr>
+    <tr><th>Attendance:</th><th><input type="text" name='attn'></th></tr>
+    <tr><th>Salary:</th><th><input type="text" name='salary'></th></tr>
+</table>
+<input type="submit" value="Create" style='width:300px;margin:2px;padding:10px;font-size:18px;background-color: green;color: white;border: none;border-radius: 25px;font-weight: bold;'>
+</form>
+    
+</div>
+</center>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<div style="width: 28%;margin: 10px;display: inline-block;text-align: center;background-color: rgb(142, 248, 248);">
+    <h1>Total Appointments</h1>
+    <h1>{{tot}}</h1>
+</div>
+<div style="width: 28%;margin: 50px;display: inline-block;text-align: center;background-color: rgb(149, 245, 245);">
+    <h1>Appointments Done</h1>
+    <h1>{{com}}</h1>
+</div>
+<div style="width: 28%;margin: 50px;display: inline-block;text-align: center;background-color: rgb(66, 240, 240);">
+    <h1>Upcoming Appointments</h1>
+    <h1>{{pend}}</h1>
+</div>
+<div class='appt'>
+    <a href="{% url 'setapt' %}"><button style="width: 100%;">NEW APPOINTMENT</button></a>
+<table style="text-align: center;">
+    <tr style="background-color: black;color: white;text-align: center;"><th>Date</th><th>Time</th><th>Patient</th><th>Consulting Doctor</th><th>Status</th></tr>
+    {% for ap in ap %}
+    <tr><th>{{ap.date}}</th><th>{{ap.time}}</th><th>{{ap.patient}}</th><th>{{ap.doctor}}</th><th>{{ap.status}}</th></tr>
+    {% endfor %}
+</table>
+</div>
+<div class='pat'>
+    <a href="{% url 'crtpat' %}"><button style="width: 100%;">Create Patient</button></a>
+<table style="text-align: center;">
+    <tr style="background-color: black;color: white;text-align: center;">
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Age</th>
+        <th>Remove</th>
+        <th>Update</th>
+    </tr>
+    {% for p in p %}
+        <tr>
+            <th>{{p.user.first_name}}</th>
+            <th>{{p.phone}}</th>
+            <th>{{p.user.email}}</th>
+            <th>{{p.gender}}</th>
+            <th>{{p.age}}</th>
+            <form method="POST" action="{% url 'deletepat' %}">
+                {%csrf_token%}
+                <input type='hidden' value="{{ p.pid }}" name='pid'>
+            <th><button type='submit' style="background-color: red;">Delete</button></th>
+            </form>
+            <form method="POST" action="{% url 'updatepat' %}">
+                {%csrf_token%}
+                <input type='hidden' value="{{ p.pid }}" name='pid'>
+            <th><button type='submit' style="background-color: green;">Update</button></th>
+        </tr>
+            </form>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

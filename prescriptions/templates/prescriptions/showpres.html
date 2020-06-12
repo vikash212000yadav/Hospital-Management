@@ -1,0 +1,17 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<center>
+<a href="{% url 'addpres'%}"><button style="width: 65%;background-color: green;margin: 10px;">Add Prescription</button></a>
+</center>
+{% for pre in pre %}
+<div style="margin-left: 20%;font-size: 18px;background-color: honeydew;width: 60%;padding: 10px;border-bottom: 2px solid black;">
+    <h2>Date : {{ pre.date|date:"F d Y" }}</h2>
+    <b>Patient Name : </b>{{ pre.patient }}<br><br>
+    
+<b>Disease : </b>{{ pre.disease }}<br><br>
+<b>Prescription : </b>{{ pre.prescription }}<br><br>
+</div>    
+{% endfor %}
+
+{% endblock %}

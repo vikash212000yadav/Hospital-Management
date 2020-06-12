@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>Login</title>
+        <style>
+            body{
+                background-color: black;
+            }
+            form{
+                margin-top: 100px;
+                width: 35%;
+                top: 50%;
+                font-weight: bold;
+                padding: 10px;
+                border: 2px solid white;
+            }
+            ::-webkit-scrollbar{
+    display: none;
+    }
+            input{
+                border: 2px solid black;
+                width: 250px;
+                margin: 10px;
+                text-align: center;
+                font-size: 15px;
+                height: 35px;
+                border-radius: 4px;
+            }
+            input:hover{
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+        <form method='POST'>
+
+            <h1 style="color: white;font-family: Arial;"> Sign In </h1>
+            {% csrf_token %}
+            <input type="text" placeholder="Email" name="email"><br>
+            <input type="password" placeholder="Password" name="password"><br><br>
+            <a href="{% url 'register' %}">Don't have an account? Register now!</a><br><br>
+            {% for m in messages %}
+        <p style="color: white;width: 250px;background-color: red;">{{m}}</p>
+        {% endfor %}
+            <input type="submit" style="background-color: green;color: white;border: none;border-radius: 25px;font-weight: bold;" value="Login">
+
+        </form>
+    </center>
+    </body>
+</html>

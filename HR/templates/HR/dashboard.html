@@ -1,0 +1,57 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<div style="width: 28%;margin: 10px;display: inline-block;text-align: center;background-color: rgb(142, 248, 248);">
+    <h1>Total Doctors</h1>
+    <h1>{{tot}}</h1>
+</div>
+<div style="width: 28%;margin: 50px;display: inline-block;text-align: center;background-color: rgb(149, 245, 245);">
+    <h1>Total Patients</h1>
+    <h1>{{k}}</h1>
+</div>
+<div style="width: 28%;margin: 50px;display: inline-block;text-align: center;background-color: rgb(66, 240, 240);">
+    <h1>On-Duty Doctors</h1>
+    <h1>{{ad}}</h1>
+</div>
+<div class='pat' style="width:98%;">
+    <a href="{% url 'crtdoc' %}"><button style="width: 100%;">Create Doctor</button></a>
+<table style="text-align: center;">
+    <tr style="background-color: black;color: white;text-align: center;">
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Age</th>
+        <th>Status</th>
+        <th>Department</th>
+        <th>Attendance</th>
+        <th>Salary</th>
+        <th>Remove</th>
+        <th>Update</th>
+    </tr>
+    {% for p in p %}
+        <tr>
+            <th>{{p.user.first_name}}</th>
+            <th>{{p.phone}}</th>
+            <th>{{p.user.email}}</th>
+            <th>{{p.gender}}</th>
+            <th>{{p.age}}</th>
+            <th>{{p.status}}</th>
+            <th>{{p.Department}}</th>
+            <th>{{p.attendance}}</th>
+            <th>{{p.salary}}</th>
+            <form method="POST" action="{% url 'deletedoc' %}">
+                {%csrf_token%}
+                <input type='hidden' value="{{ p.did }}" name='pid'>
+            <th><button type='submit' style="background-color: red;">Delete</button></th>
+            </form>
+            <form method="POST" action="{% url 'updatedoc' %}">
+                {%csrf_token%}
+                <input type='hidden' value="{{ p.did }}" name='pid'>
+            <th><button type='submit' style="background-color: green;">Update</button></th>
+        </tr>
+            </form>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

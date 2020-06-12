@@ -1,0 +1,69 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <table>
+    
+    <tr><th>Patient:</th><th><select name="pat">
+        {% for p in p %}
+        <option value="{{p}}">{{p}}</option>
+        {%endfor%}
+    </select>
+    </th></tr>
+    <tr><th>Doctor:</th><th><select name="doc">
+        {% for d in d %}
+        <option value="{{d}}">{{d}}</option>
+        {%endfor%}
+    </select>
+    </th></tr>
+
+    <tr><th>Status</th><th><select name='status'>
+        <option value="Pending">Pending</option>
+        <option value="Completed">Completed</option>
+    </select></th></tr>
+    
+    
+    <tr><th>Time:</th><th><select name="hours">
+        {% for h in h %}
+        <option value="{{h}}">{{h}}</option>
+        {%endfor%}
+        </select>
+        <select name="min">
+            {% for m in m %}
+            <option value="{{m}}">{{m}}</option>
+            {%endfor%}
+            </select>
+            <select name='am'>
+                <option value="am">am</option>
+                <option value="pm">pm</option>
+            </select>
+    </th></tr>
+    
+        <tr><th>Date:</th><th><select name='d'>
+            {% for da in da %}
+            <option value="{{da}}">{{da}}</option>
+            {%endfor%}   
+        </select> <select name="m">
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+              </select> <select name='y'>
+            {% for y in y %}
+            <option value="{{y}}">{{y}}</option>
+            {%endfor%}   
+        </select>
+    </th></tr>
+    </table>
+    <input type="submit" value="Update" style='width:300px;margin:2px;padding:10px;font-size:18px;background-color: green;color: white;border: none;border-radius: 25px;font-weight: bold;'>
+    </form>
+{% endblock %}

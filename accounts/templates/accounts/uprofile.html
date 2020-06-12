@@ -1,0 +1,56 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<center>
+<div class="profile">
+    <div style="font-size: 20px;font-family: arial;font-style: initial;background-color: indigo;color: white;padding: 5px;">{{ pro.user.first_name}}</div>
+<form method="POST" enctype="multipart/form-data" action='{% url "uprofile" %}'>
+{% csrf_token %}
+<table>    
+<tr><th>Email:</th><th><input type="text" value='{{ pro.user.email }}' disabled></th></tr>
+
+<tr><th>Phone:</th><th><input type="text" value='{{ pro.phone }}' name='phone'></th></tr>
+<tr><th>Gender:</th><th><select name="gender">
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option></th></tr>
+<tr><th>Age:</th><th><input type="text" value='{{ pro.age }}' name='age'></th></tr>
+{% ifequal pro.user.last_name "Patient" %}
+
+<tr><th>Address:</th><th><input type="text" value='{{ pro.address }}' name='address'></th></tr>
+
+<tr><th>Blood Group:</th><th><select name="bloodgroup">
+    <option value="A+">A+</option>
+    <option value="A-">A-</option>
+    <option value="B+">B+</option>
+    <option value="B-">B-</option>
+    <option value="O+">O+</option>
+    <option value="O-">O-</option>
+    <option value="AB+">AB-</option>
+    <option value="AB-">AB+</option>
+</select></th></tr>
+<tr><th>Case Paper:</th><th><input type="text" value='{{ pro.casepaper }}' name='casepaper'></th></tr>
+
+<tr><th>Medical Report :</th><th><input type="file" name='image' required></th></tr>
+
+</table>
+<input type="hidden" value="{{pro.pid}}" name='pid'>
+{% endifequal %}
+{% ifequal pro.user.last_name "Doctor" %}
+<tr><th>Status:</th><th><select name="status">
+    <option value="ACTIVE">ACTIVE</option>
+    <option value="INACTIVE">INACTIVE</option>
+    </select></th></tr>
+    <tr><th>Department:</th><th><input type="text" value='{{ pro.Department }}' name='dept'></th></tr>
+    <tr><th>Attendance:</th><th><input type="text" value='{{ pro.attendance }}' name='attn'></th></tr>
+    <tr><th>Salary:</th><th><input type="text" value='{{ pro.salary }}' name='salary'></th></tr>
+
+</table>
+<input type="hidden" value="{{pro.did}}" name='pid'>
+{% endifequal %}
+<input type="submit" value="Update" style='width:300px;margin:2px;padding:10px;font-size:18px;background-color: green;color: white;border: none;border-radius: 25px;font-weight: bold;'>
+</form>
+    
+</div>
+</center>
+{% endblock %}

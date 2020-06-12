@@ -1,0 +1,24 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<center>
+<div class="profile">
+<form method="POST">
+{% csrf_token %}
+<table>
+<tr><th>Patient:</th><th>
+    <select name='pat'>
+        {% for p in p %}
+        <option value="{{p}}">{{p}}</option>
+        {% endfor %}
+    </select>
+</th></tr>
+<tr><th>Prescription:</th><th><input type="text" name='pres'></th></tr>
+<tr><th>Disease:</th><th><input type="text" name='dis'></th></tr>
+</table>
+<input type="submit" value="Update" style='width:300px;margin:2px;padding:10px;font-size:18px;background-color: green;color: white;border: none;border-radius: 25px;font-weight: bold;'>
+</form>
+    
+</div>
+</center>
+{% endblock %}

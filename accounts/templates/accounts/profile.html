@@ -1,0 +1,32 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<center>
+
+<div class="profile">
+    <div style="font-size: 20px;font-family: arial;font-style: initial;background-color: indigo;color: white;padding: 5px;">{{user.first_name}}</div>
+<table>
+
+<tr><th>Name:</th><th>{{ user.first_name }}</th></tr>
+<tr><th>Email:</th><th>{{ user.email }}</th></tr>
+<tr><th>Phone:</th><th> {{ pro.phone }}</th></tr>
+<tr><th>Gender:</th><th> {{ pro.gender }}</th></tr>
+<tr><th>Age:</th><th> {{ pro.age }}</th></tr>
+{% ifequal pro.user.last_name "Patient" %}
+<tr><th>Address:</th><th>{{pro.address}}</th></tr>
+<tr><th>Blood Group:</th><th>{{pro.bloodgroup}}</th></tr>
+<tr><th>Case Paper:</th><th>{{pro.casepaper}}</th></tr>
+</table>
+<a href="{{ pro.image.url }}"><input type="submit" style='width:300px;margin:10px;font-size:18px;padding:10px;background-color: green;color: white;border: none;border-radius: 25px;font-weight: bold;' value="Medical Report"></a>
+<a href="{% url 'uprofile' %}"><input type="submit" style='width:300px;margin:10px;font-size:18px;padding:10px;background-color: green;color: white;border: none;border-radius: 25px;font-weight: bold;' value="Update Profile"></a>
+{%endifequal%}
+{% ifequal pro.user.last_name "Doctor" %}
+<tr><th>Department:</th><th>{{pro.Department}}</th></tr>
+<tr><th>Attendance:</th><th>{{pro.attendance}}</th></tr>
+<tr><th>Salary:</th><th>{{pro.salary}}</th></tr>
+</table>
+{%endifequal%}
+</div>
+</center>
+
+{% endblock %}

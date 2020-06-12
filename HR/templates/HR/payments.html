@@ -1,0 +1,19 @@
+{% extends 'home/base.html' %}
+{% block content %}
+<center>
+<table style="text-align: center;">
+    <tr style="background-color: black;color: white;text-align: center;"><th>Paid</th><th>Outstanding</th><th>Date</th><th>Invoice</th></tr>
+    {% for payt in payt %}
+    <tr>
+        <th>{{payt.outstanding}}</th>
+        <th>{{payt.paid}}</th>
+        <th>{{payt.date|date:"F d Y"}}</th>
+        <form method="POST" action="{% url 'show' %}">
+            {%csrf_token%}
+            <input type='hidden' value="{{ payt.pmid }}" name='pid'>
+        <th><button type='submit' style="padding: 10px;font-size: 14px;">Show Invoice</button></th>
+        </form></tr>
+    {% endfor %}
+</table>
+</center>
+{%endblock%}
