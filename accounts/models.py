@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
 
+
+# Patient Models
 class Patient(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     pid=models.AutoField(primary_key=True)
@@ -14,8 +16,10 @@ class Patient(models.Model):
     otp=models.CharField(max_length=6)
     verify=models.CharField(max_length=1,default=0)
     image=models.ImageField(default='default.jpg',upload_to='med_report')
+    
     def __str__(self):
         return f'{self.user.first_name}'
+    
     def save(self,*args,**kwargs):
         super().save(*args,**kwargs)
         img=Image.open(self.image.path)
@@ -24,6 +28,8 @@ class Patient(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
+            
+# Doctor Models            
 class Doctor(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     did=models.AutoField(primary_key=True)
@@ -36,5 +42,6 @@ class Doctor(models.Model):
     salary=models.CharField(max_length=10)
     otp=models.CharField(max_length=6)
     verify=models.CharField(max_length=1,default=0)
+    
     def __str__(self):
         return f'{self.user.first_name}'
