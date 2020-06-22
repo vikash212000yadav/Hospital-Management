@@ -4,7 +4,7 @@
 <center>
 <div class="profile">
     {% for m in messages %}
-        <p style="color: white;width: 250px;background-color: red;">{{m}}</p>
+        <p style="width: 250px;background-color: red;">{{m}}</p>
         {% endfor %}
 <form method="POST" enctype="multipart/form-data" action='{% url "crtpat" %}'>
 {% csrf_token %}
@@ -31,7 +31,7 @@
 <tr><th>Case Paper:</th><th><input type="text" name='casepaper'></th></tr>
 <tr><th>Medical Report :</th><th><input type="file" name='image' required></th></tr>
 </table>
-<input type="submit" value="Create" style='width:300px;margin:2px;padding:10px;font-size:18px;background-color: green;color: white;border: none;border-radius: 25px;font-weight: bold;'>
+<input type="submit" value="Create">
 </form>
     
 </div>
