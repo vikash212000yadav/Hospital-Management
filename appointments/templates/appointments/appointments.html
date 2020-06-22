@@ -4,13 +4,13 @@
 <center>
 <table style="text-align: center;">
     {% ifequal user.last_name "Patient" %}
-    <tr style="background-color: black;color: white;text-align: center;"><th>Date</th><th>Time</th><th>Consulting Doctor</th><th>Status</th></tr>
+    <tr style="text-align: center;"><th>Date</th><th>Time</th><th>Consulting Doctor</th><th>Status</th></tr>
     {% for ap in ap %}
     <tr><th>{{ap.date}}</th><th>{{ap.time}}</th><th>{{ap.doctor}}</th><th>{{ap.status}}</th></tr>
     {% endfor %}
     {% endifequal %}
     {% ifequal user.last_name "Doctor" %}
-    <tr style="background-color: black;color: white;"><th>Date</th><th>Time</th><th>Patient</th><th>Status</th></tr>
+    <tr><th>Date</th><th>Time</th><th>Patient</th><th>Status</th></tr>
     {% for ap in ap %}
     <tr><th>{{ap.date}}</th><th>{{ap.time}}</th><th>{{ap.patient}}</th><th>{{ap.status}}</th></tr>
     {% endfor %}
